@@ -1,2 +1,2 @@
 ## strweb
-#### https://github.com/lisovski49/strweb
+#### https://lisovski49.github.io/strweb/
