@@ -1,0 +1,81 @@
+/* Установка фонового цвета */
+body {
+    background-color: #f0f0f5;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/* Общие стили для контента */
+main {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Якорные ссылки */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+/* Изображения с одинаковым размером и закругленными краями */
+img {
+    width: 100%;
+    max-width: 300px;
+    height: 300px;
+    object-fit: cover; 
+    border-radius: 20px;
+    margin: 10px;
+}
+
+/* Шрифты для фильмов */
+@font-face {
+    font-family: 'GalaxyFont';
+    src: url('fonts/GalaxyFont.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'SpiderFont';
+    src: url('fonts/SpiderFont.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'GreenMileFont';
+    src: url('fonts/GreenMileFont.ttf') format('truetype');
+}
+
+/* Применение шрифтов к фильмам */
+#GuardiansOfTheGalaxy {
+    font-family: 'GalaxyFont';
+}
+
+#SpiderManHomecoming {
+    font-family: 'SpiderFont';
+}
+
+#TheGreenMile {
+    font-family: 'GreenMileFont';
+}
+
+/* Выравнивание текста для фильмов */
+.center-text {
+    text-align: center;
+}
+
+.justify-text {
+    text-align: justify;
+}
+
+.right-text {
+    text-align: right;
+}
+
+/* Жирное начертание разными способами */
+b, strong {
+    font-weight: bold;
+}
