@@ -34,17 +34,17 @@ img {
 }
 
 /* Шрифты для фильмов */
-@font-face {
+@font-face p {
     font-family: 'GalaxyFont';
     src: url('fonts/GalaxyFont.ttf') format('truetype');
 }
 
-@font-face {
+@font-face p {
     font-family: 'SpiderFont';
     src: url('fonts/SpiderFont.ttf') format('truetype');
 }
 
-@font-face {
+@font-face p {
     font-family: 'GreenMileFont';
     src: url('fonts/GreenMileFont.ttf') format('truetype');
 }
