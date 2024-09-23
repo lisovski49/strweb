@@ -34,31 +34,31 @@ img {
 }
 
 /* Шрифты для фильмов */
-@font-face p {
+@font-face {
     font-family: 'GalaxyFont';
     src: url('fonts/GalaxyFont.ttf') format('truetype');
 }
 
-@font-face p {
+@font-face {
     font-family: 'SpiderFont';
     src: url('fonts/SpiderFont.ttf') format('truetype');
 }
 
-@font-face p {
+@font-face {
     font-family: 'GreenMileFont';
     src: url('fonts/GreenMileFont.ttf') format('truetype');
 }
 
 /* Применение шрифтов к фильмам */
-#GuardiansOfTheGalaxy {
+#GuardiansOfTheGalaxy p {
     font-family: 'GalaxyFont';
 }
 
-#SpiderManHomecoming {
+#SpiderManHomecoming p {
     font-family: 'SpiderFont';
 }
 
-#TheGreenMile {
+#TheGreenMile p {
     font-family: 'GreenMileFont';
 }
 
