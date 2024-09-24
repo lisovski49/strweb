@@ -5,7 +5,7 @@ body {
 }
 
 /* Общие стили для контента */
-main {
+header, main {
     max-width: 1440px;
     margin: 0 auto;
     padding: 20px;
