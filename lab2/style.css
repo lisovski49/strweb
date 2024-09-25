@@ -4,14 +4,12 @@ body {
     font-family: sans-serif;
 }
 
-/* Общие стили для контента */
 header, main {
     max-width: 1440px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Якорные ссылки */
 ul {
     list-style-type: none;
     padding: 0;
