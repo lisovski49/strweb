@@ -1,0 +1,92 @@
+/* Стили для тела страницы */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Высота экрана */
+    display: flex; /* Flexbox для центрирования */
+    justify-content: center; /* Горизонтальное выравнивание */
+    align-items: center; /* Вертикальное выравнивание */
+}
+
+/* Стили для контейнера формы */
+.container {
+    width: 400px; /* Ширина контейнера */
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box; /* Учитываем padding в общей ширине контейнера */
+}
+
+/* Стили для fieldset */
+fieldset {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Стили для legend */
+legend {
+    font-weight: bold;
+}
+
+/* Стили для label */
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+/* Стили для текстовых и других полей ввода */
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Стили для radio-кнопок, чтобы подписи были рядом с элементами */
+fieldset input[type="radio"] {
+    display: inline-block;
+    margin-right: 5px; /* Отступ между радиокнопкой и текстом */
+}
+
+fieldset label {
+    display: inline-block;
+    margin-right: 20px; /* Отступ между полями */
+}
+
+/* Стили для контейнера кнопок */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Стили для кнопок отправки и сброса */
+input[type="submit"], input[type="reset"] {
+    padding: 15px 30px; /* Увеличиваем размер кнопок */
+    font-size: 18px; /* Увеличиваем размер текста */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+input[type="submit"] {
+    background-color: #28a745; /* Зеленая кнопка */
+    color: white;
+}
+
+input[type="reset"] {
+    background-color: #dc3545; /* Красная кнопка */
+    color: white;
+}
+
+/* Стили для кнопок при наведении */
+input[type="submit"]:hover, input[type="reset"]:hover {
+    opacity: 0.9;
+}
