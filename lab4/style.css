@@ -1,0 +1,95 @@
+html {
+  font-family: sans-serif; 
+}
+
+body {
+  margin: 0; 
+}
+
+header {
+  background: rgb(52, 206, 142); 
+  height: 100px;
+}
+
+h1 {
+  text-align: left; 
+  line-height: 100px; 
+  margin-left: 2em; 
+}
+
+button {
+  margin: 50px; 
+  font-size: 20px; 
+  background-color: rgb(172, 6, 153); 
+  border: none; 
+  padding: 10px; 
+  animation: shake 200ms infinite; /* Анимация тряски */
+}
+
+button:hover {
+  background-color: #d154ff; 
+  animation: none; 
+}
+
+a {
+  font-size: 20px; 
+  margin-left: 2em; 
+  text-decoration: none; 
+  color: black; 
+  position: relative; 
+}
+
+.link:after {
+  position: absolute;
+  content: '';
+  bottom: 0;
+  display: block;
+  width: 0;
+  height: 2px;
+  background: green;
+  transition: .3s;
+  left: 50%;
+  transform: translate(-50%);
+  }
+
+.link:hover {
+  color: green;
+}
+
+.link:hover:after {
+  width: 100%; 
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); } /* Начальное состояние анимации */
+  25% { transform: translateX(2px); } /* Сдвиг вправо */
+  50% { transform: translateX(0px); } /* Возврат в начальное положение */
+  75% { transform: translateX(-2px); } /* Сдвиг влево */
+  100% { transform: translateX(0); } /* Возврат в начальное положение */
+}
+
+.ball {
+  height: 70px; 
+  width: 70px; 
+  background-color: #f3b200; 
+  border-radius: 100%; 
+  margin-left: 2em; 
+  animation: bounce 5s linear; 
+}
+
+@keyframes bounce {
+  0% { transform: translateY(0px); height: 70px; width: 70px; animation-timing-function: ease-in; } /* Начальное состояние */
+  39.5% { transform: translateY(600px); height: 60px; width: 70px; } /* Сдвиг вниз */
+  40% { transform: translateY(600px); height: 35px; width: 80px; } /* Сжатие шарика */
+  41% { transform: translateY(600px); height: 60px; width: 70px; animation-timing-function: ease-out; } /* Возврат в высоту */
+  59.5% { transform: translateY(200px); height: 70px; width: 70px; } /* Подъем */
+  60% { transform: translateY(200px); height: 70px; width: 70px; animation-timing-function: ease-in; } /* Переход к следующему этапу */
+  79% { transform: translateY(600px); height: 60px; width: 70px; } /* Снова сдвиг вниз */
+  80% { transform: translateY(600px); height: 50px; width: 74px; } /* Сжатие */
+  81% { transform: translateY(600px); height: 60px; width: 70px; animation-timing-function: ease-out; } /* Возврат */
+  90% { transform: translateY(400px); height: 70px; width: 70px; } /* Подъем */
+  91% { transform: translateY(400px); height: 70px; width: 70px; animation-timing-function: ease-in; } /* Переход */
+  97% { transform: translateY(590px); height: 66px; width: 70px; } /* Предпоследний этап */
+  99% { transform: translateY(600px); height: 65px; width: 70px; } /* Упадок */
+  100% { transform: translateY(600px); height: 70px; width: 70px; } /* Конечное состояние */
+}
