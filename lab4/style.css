@@ -20,7 +20,7 @@ h1 {
 button {
   margin: 50px; 
   font-size: 20px; 
-  background-color: rgb(172, 6, 153); 
+  background-color: green; 
   border: none; 
   padding: 10px; 
   animation: shake 200ms infinite; /* Анимация тряски */
