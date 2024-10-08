@@ -74,7 +74,8 @@ a {
   background-color: #f3b200; 
   border-radius: 100%; 
   margin-left: 2em; 
-  animation: bounce 5s linear; 
+  bottom: 0;
+  animation: bounce 5s forwards;
 }
 
 @keyframes bounce {
