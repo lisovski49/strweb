@@ -10,11 +10,8 @@
 
 <div class="container">
     <h2>Регистрация</h2>
-    
-    <!-- Элемент формы с атрибутами action и method -->
+
     <form action="/submit_form" method="post">
-        
-        <!-- Личные данные -->
         <fieldset>
             <legend>Личные данные</legend>
             
@@ -34,7 +31,6 @@
             <input type="tel" id="phone" name="phone" placeholder="+375-xx-xxx-xx-xx" required>
         </fieldset>
         
-        <!-- Пол с использованием radio-кнопок -->
         <fieldset>
             <legend>Пол</legend>
             
@@ -44,8 +40,6 @@
             <input type="radio" id="female" name="gender" value="female">
             <label for="female">Женский</label>
         </fieldset>
-        
-        <!-- Загрузка фотографии -->
         <fieldset>
             <legend>Загрузите ваши фото</legend>
             
@@ -53,8 +47,6 @@
             <input type="file" id="photo1" name="photo1" accept="image/*">
             
         </fieldset>
-        
-        <!-- Оборачиваем кнопки в div для центрирования -->
         <div class="button-container">
             <input type="submit" value="Отправить">
             <input type="reset" value="Сбросить">
