@@ -7,7 +7,7 @@ html {
   }
 
   header {
-    background: rgb(52, 206, 142);
+    background: rgb(31, 188, 245);
     height: 100px;
   }
 
@@ -21,7 +21,30 @@ html {
   article {
     padding: 10px;
     margin: 10px;
-    background: rgba(16, 233, 215, 0.178);
+    background: rgba(29, 8, 114, 0.178); 
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: repeat(4,1fr);
+    grid-template-areas:
+    "first second third third"
+    "first fourth third third"
+    "first fifth sixth seventh"
+    "eighth ninth ninth tenth";
+  }
+
+  article:nth-child(1) {
+    grid-area: first;
+  }
+
+  article:nth-child(3) {
+    grid-area: third;
+  }
+
+  article:nth-child(9) {
+    grid-area: ninth;
   }
 
   
