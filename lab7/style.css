@@ -1,0 +1,155 @@
+html {
+    font-family: sans-serif;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  header {
+    background: rgb(31, 188, 245);
+    height: 100px;
+  }
+
+  h1 {
+    text-align: center;
+    color: white;
+    line-height: 100px;
+    margin: 0;
+  }
+
+  article {
+    padding: 10px;
+    margin: 10px;
+    background: rgba(29, 8, 114, 0.178); 
+  }
+
+  article:nth-child(1) {
+    grid-area: first;
+  }
+
+  article:nth-child(2) {
+    grid-area: second;
+  }
+
+  article:nth-child(3) {
+    grid-area: third;
+  }
+
+  article:nth-child(4) {
+    grid-area: fourth;
+  }
+
+  article:nth-child(5) {
+    grid-area: fifth;
+  }
+
+  @media (min-width: 1400px) {
+  .adaptive {
+    display: grid;
+      grid-template-columns: repeat(4,1fr);
+      grid-template-rows: repeat(7,1fr);
+      grid-template-areas:
+      "first first second second"
+      "first first second second"
+      "third third third third"
+      "third third third third"
+      "fourth fourth fifth fifth"
+      "fourth fourth fifth fifth"
+      "sixth seventh eighth ninth"
+  }
+}
+
+@media ((min-width: 700px) and (max-width:1399px)) {
+  .adaptive {
+    display: grid;
+      grid-template-columns: repeat(2,1fr);
+      grid-template-rows: repeat(10,1fr);
+      grid-template-areas:
+      "first first"
+      "first first"
+      "second second"
+      "second second"
+      "third third"
+      "third third"
+      "fourth fifth"
+      "fourth fifth"
+      "sixth seventh"
+      "eighth ninth"
+  }
+}
+
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+  flex-wrap: nowrap;
+}
+
+.image-container img {
+  width: 350px;
+  height: 200px;
+  margin-left: 10px; 
+  transition: transform 0.3s ease, z-index 0.3s;
+  position: relative;
+  z-index: 1;
+}
+
+.image-container img:first-child {
+  margin-left: 0; 
+}
+
+.image-container img:hover {
+  transform: scale(1.2);
+  z-index: 10;
+}
+
+@media ((min-width: 1000px) and (max-width:1399px)) {
+  .image-container img {
+    margin-left: -40px; 
+  }
+
+  img:nth-child(2) {
+    margin-top: 5%;
+  }
+  img:nth-child(3) {
+    margin-top: 10%;
+  }
+  img:nth-child(4) {
+    margin-top: 15%;
+  }
+}
+
+
+@media ((min-width: 700px) and (max-width:999px)) {
+  .image-container img {
+    margin-left: -120px; 
+  }
+
+  img:nth-child(2) {
+    margin-top: 10%;
+  }
+  img:nth-child(3) {
+    margin-top: 20%;
+  }
+  img:nth-child(4) {
+    margin-top: 30%;
+  }
+}
+
+@media (max-width: 699px) {
+  .image-container img {
+    margin-left: -200px; 
+  }
+
+  img:nth-child(2) {
+    margin-top: 15%;
+  }
+  img:nth-child(3) {
+    margin-top: 30%;
+  }
+  img:nth-child(4) {
+    margin-top: 45%;
+  }
+}
