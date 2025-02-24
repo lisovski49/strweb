@@ -8,23 +8,15 @@
 <body>
 <h1>Личная база фильмов</h1>
 <div id="movieTable"></div>
-
 <script>
-    // 1) Запрашиваем количество просмотренных фильмов
     const numberOfFilms = prompt('Сколько фильмов вы уже посмотрели?');
-
-    // 2) Создаем объект personalMovieDB
     const personalMovieDB = {
         count: numberOfFilms,
         movies: {}
     };
-
-    // 3) Запрашиваем данные о фильмах
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < numberOfFilms; i++) {
         let movie;
         let rating;
-
-        // Проверяем корректность ввода названия фильма
         while (true) {
             movie = prompt('Один из последних просмотренных фильмов?');
             if (movie && movie.length <= 50) {
@@ -33,7 +25,6 @@
             alert('Введите корректное название фильма (не пустое и не длиннее 50 символов).');
         }
 
-        // Проверяем корректность ввода оценки
         while (true) {
             rating = prompt('На сколько оцените его?');
             if (rating && !isNaN(rating)) {
@@ -41,15 +32,9 @@
             }
             alert('Введите корректную оценку.');
         }
-
-        // 5) Записываем данные в объект movies
         personalMovieDB.movies[movie] = rating;
     }
-
-    // 6) Выводим объект personalMovieDB в консоль
     console.log(personalMovieDB);
-
-    // 7) Функция для вывода объекта movies в виде таблицы на страницу
     function displayMovies(movies) {
         const table = document.createElement('table');
         const headerRow = document.createElement('tr');
@@ -77,8 +62,6 @@
 
         document.getElementById('movieTable').appendChild(table);
     }
-
-    // Вызываем функцию для отображения фильмов
     displayMovies(personalMovieDB.movies);
 </script>
 </body>
