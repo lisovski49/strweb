@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин футболок</title>
+    <script type="module" src="shirts.js"></script>
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .shirt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .shirt-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .shirt-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .shirt-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .shirt-info {
+            padding: 15px;
+        }
+
+        .shirt-name {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .shirt-description {
+            margin: 0 0 15px 0;
+            color: #666;
+        }
+
+        .shirt-price {
+            font-weight: bold;
+            color: #e44d26;
+            margin-bottom: 15px;
+        }
+
+        .quick-view-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .see-page-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .quick-view-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+        }
+
+        .quick-view-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .quick-view-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .shirt-view-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-view-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .quick-view-image {
+            max-width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Магазин футболок</h1>
+    <div id="shirt-container" class="shirt-grid"></div>
+</div>
+
+<script type="module">
+    import { shirts } from './shirts.js';
+
+    function createShirtCard(shirt) {
+        const card = document.createElement('div');
+        card.className = 'shirt-card';
+
+        const description = shirt.description || 'Описание отсутствует';
+
+        card.innerHTML = `
+            <img src="${shirt.colors.white?.front || shirt.default?.front}"
+                 alt="${shirt.name}"
+                 class="shirt-image"
+                 onerror="this.src='${shirt.default?.front}'">
+            <div class="shirt-info">
+                <h3 class="shirt-name">${shirt.name}</h3>
+                <p class="shirt-description">${description}</p>
+                <p class="shirt-price">${shirt.price}</p>
+                <button class="see-page-btn">See Page</button>
+            </div>
+        `;
+
+        return card;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('shirt-container');
+        shirts.forEach(shirt => {
+            container.appendChild(createShirtCard(shirt));
+        });
+    });
+</script>
+</body>
+</html>
