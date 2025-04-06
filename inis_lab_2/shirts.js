@@ -25,68 +25,69 @@ const shirts = [{
         "back": "shirt_images/default-m-back.png"
     }
 },
-{
-    "name": "Car",
-    "description": "As you move in to campus, one of the first memories so many students have is driving up to their dorm, unloading their bags, and moving in. How do they arrive to campus? By car, of course!",
-    "price": "$10.99",
-    "colors": {
-        "white": {
-            "front": "shirt_images/car-white-front.png",
-            "back": "shirt_images/car-white-back.png"
+    {
+        "name": "Car",
+        "description": "As you move in to campus, one of the first memories so many students have is driving up to their dorm, unloading their bags, and moving in. How do they arrive to campus? By car, of course!",
+        "price": "$10.99",
+        "colors": {
+            "white": {
+                "front": "shirt_images/car-white-front.png",
+                "back": "shirt_images/car-white-back.png"
+            },
+            "blue": {
+                "front": "shirt_images/car-blue-front.png",
+                "back": "shirt_images/car-blue-back.png"
+            },
+            "green": {
+                "front": "shirt_images/car-green-front.png",
+                "back": "shirt_images/car-green-back.png"
+            },
+            "yellow": {
+                "front": "shirt_images/car-yellow-front.png",
+                "back": "shirt_images/car-yellow-back.png"
+            },
+            "red": {
+                "front": "shirt_images/car-red-front.png",
+                "back": "shirt_images/car-red-back.png"
+            }
         },
-        "blue": {
-            "front": "shirt_images/car-blue-front.png",
-            "back": "shirt_images/car-blue-back.png"
-        },
-        "green": {
-            "front": "shirt_images/car-green-front.png",
-            "back": "shirt_images/car-green-back.png"
-        },
-        "yellow": {
-            "front": "shirt_images/car-yellow-front.png",
-            "back": "shirt_images/car-yellow-back.png"
-        },
-        "red": {
-            "front": "shirt_images/car-red-front.png",
-            "back": "shirt_images/car-red-back.png"
+        "default": {
+            "front": "shirt_images/default-w-front.png",
+            "back": "shirt_images/default-w-back.png"
         }
     },
-    "default": {
-        "front": "shirt_images/default-w-front.png",
-        "back": "shirt_images/default-w-back.png"
-    }
-},
-{
-    "name": "Forever Plaid",
-    "price": "$13.99",
-    "description": "Proudly wear your tartan plaid as a patch on your front shirt pocket. And on the back, ask the important question that all CMU students should know the answer to: got plaid?",
-    "colors": {
-        "white": {
-            "front": "shirt_images/plaid-white-front.png",
-            "back": "shirt_images/plaid-white-back.png"
+    {
+        "name": "Forever Plaid",
+        "price": "$13.99",
+        "description": "Proudly wear your tartan plaid as a patch on your front shirt pocket. And on the back, ask the important question that all CMU students should know the answer to: got plaid?",
+        "colors": {
+            "white": {
+                "front": "shirt_images/plaid-white-front.png",
+                "back": "shirt_images/plaid-white-back.png"
+            },
+            "pink": {
+                "front": "shirt_images/plaid-pink-front.png",
+                "back": "shirt_images/plaid-pink-back.png"
+            }
         },
-        "pink": {
-            "front": "shirt_images/plaid-pink-front.png",
-            "back": "shirt_images/plaid-pink-back.png"
+        "default": {
+            "front": "shirt_images/default-w-front.png",
+            "back": "shirt_images/default-w-back.png"
         }
     },
-    "default": {
-        "front": "shirt_images/default-w-front.png",
-        "back": "shirt_images/default-w-back.png"
-    }
-},
-{
-    "name": "BSUIR",
-    "description": "BSUIR mission is to train engineers and scientists capable of generating and implementing innovative ideas, creating competitive high technology products in the spheres of computer science and electronics.",
-    "price": "$6.99",
-    "colors": {
-        "white": {
-            "front": "shirt_images/bsuir-white-front.png",
-            "back": "shirt_images/bsuir-white-back.png"
+    {
+        "name": "BSUIR",
+        "description": "BSUIR mission is to train engineers and scientists capable of generating and implementing innovative ideas, creating competitive high technology products in the spheres of computer science and electronics.",
+        "price": "$6.99",
+        "colors": {
+            "white": {
+                "front": "shirt_images/bsuir-white-front.png",
+                "back": "shirt_images/bsuir-white-back.png"
+            }
+        },
+        "default": {
+            "front": "shirt_images/default-m-front.png",
+            "back": "shirt_images/default-m-back.png"
         }
-    },
-    "default": {
-        "front": "shirt_images/default-m-front.png",
-        "back": "shirt_images/default-m-back.png"
-    }
-}];
+    }];
+export { shirts };
