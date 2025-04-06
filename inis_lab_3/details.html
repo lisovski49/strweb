@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали футболки</title>
+    <script type="module" src="shirts.js"></script>
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .shirt-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .shirt-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+        }
+
+        .shirt-info {
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .shirt-name {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .shirt-description {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .shirt-price {
+            font-size: 1.5em;
+            color: #e44d26;
+            margin-bottom: 20px;
+        }
+
+        .color-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #fff;
+            transition: transform 0.2s;
+        }
+
+        .color-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .color-btn.active {
+            border: 2px solid #2196F3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Детали футболки</h1>
+    <div id="shirt-details" class="shirt-details">
+        <img id="shirt-image" class="shirt-image" src="" alt="">
+        <div class="shirt-info">
+            <h2 id="shirt-name"></h2>
+            <p id="shirt-description"></p>
+            <p id="shirt-price"></p>
+            <div id="color-buttons" class="color-buttons"></div>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { shirts } from './shirts.js';
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const shirtId = parseInt(urlParams.get('id'));
+
+    const currentShirt = shirts[shirtId];
+
+    function createColorButton(colorName, isActive = false) {
+        const btn = document.createElement('button');
+        btn.className = `color-btn ${isActive ? 'active' : ''}`;
+        btn.textContent = colorName;
+        btn.onclick = () => {
+            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const image = document.getElementById('shirt-image');
+            image.src = currentShirt.colors[colorName]?.front || currentShirt.default?.front;
+        };
+        return btn;
+    }
+
+    function populateDetails() {
+        const nameElement = document.getElementById('shirt-name');
+        const descriptionElement = document.getElementById('shirt-description');
+        const priceElement = document.getElementById('shirt-price');
+        const colorButtonsContainer = document.getElementById('color-buttons');
+        const imageElement = document.getElementById('shirt-image');
+
+        nameElement.textContent = currentShirt.name;
+        descriptionElement.textContent = currentShirt.description || 'Описание отсутствует';
+        priceElement.textContent = currentShirt.price;
+        imageElement.src = currentShirt.colors.white?.front || currentShirt.default?.front;
+
+        const colors = Object.keys(currentShirt.colors);
+        colors.forEach((color, index) => {
+            const btn = createColorButton(color, index === 0);
+            colorButtonsContainer.appendChild(btn);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        populateDetails();
+    });
+</script>
+</body>
+</html>
