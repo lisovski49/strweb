@@ -69,6 +69,21 @@
         .color-btn.active {
             border: 2px solid #2196F3;
         }
+
+        .toggle-view-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #4CAF50;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .toggle-view-btn.active {
+            background: #2196F3;
+        }
     </style>
 </head>
 <body>
@@ -81,6 +96,10 @@
             <p id="shirt-description"></p>
             <p id="shirt-price"></p>
             <div id="color-buttons" class="color-buttons"></div>
+            <div class="view-toggle">
+                <button id="front-btn" class="toggle-view-btn active">Front</button>
+                <button id="back-btn" class="toggle-view-btn">Back</button>
+            </div>
         </div>
     </div>
 </div>
@@ -90,8 +109,15 @@
 
     const urlParams = new URLSearchParams(window.location.search);
     const shirtId = parseInt(urlParams.get('id'));
-
     const currentShirt = shirts[shirtId];
+
+    let currentColor = 'white';
+    let currentView = 'front';
+
+    function updateImage() {
+        const image = document.getElementById('shirt-image');
+        image.src = currentShirt.colors[currentColor]?.[currentView] || currentShirt.default?.[currentView];
+    }
 
     function createColorButton(colorName, isActive = false) {
         const btn = document.createElement('button');
@@ -100,35 +126,43 @@
         btn.onclick = () => {
             document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
-            const image = document.getElementById('shirt-image');
-            image.src = currentShirt.colors[colorName]?.front || currentShirt.default?.front;
+            currentColor = colorName;
+            updateImage();
         };
         return btn;
     }
 
     function populateDetails() {
-        const nameElement = document.getElementById('shirt-name');
-        const descriptionElement = document.getElementById('shirt-description');
-        const priceElement = document.getElementById('shirt-price');
+        document.getElementById('shirt-name').textContent = currentShirt.name;
+        document.getElementById('shirt-description').textContent = currentShirt.description || 'Описание отсутствует';
+        document.getElementById('shirt-price').textContent = currentShirt.price;
+
         const colorButtonsContainer = document.getElementById('color-buttons');
-        const imageElement = document.getElementById('shirt-image');
-
-        nameElement.textContent = currentShirt.name;
-        descriptionElement.textContent = currentShirt.description || 'Описание отсутствует';
-        priceElement.textContent = currentShirt.price;
-        imageElement.src = currentShirt.colors.white?.front || currentShirt.default?.front;
-
         const colors = Object.keys(currentShirt.colors);
         colors.forEach((color, index) => {
             const btn = createColorButton(color, index === 0);
+            if (index === 0) currentColor = color;
             colorButtonsContainer.appendChild(btn);
         });
+
+        updateImage();
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        populateDetails();
-    });
+    document.getElementById('front-btn').onclick = () => {
+        currentView = 'front';
+        document.getElementById('front-btn').classList.add('active');
+        document.getElementById('back-btn').classList.remove('active');
+        updateImage();
+    };
+
+    document.getElementById('back-btn').onclick = () => {
+        currentView = 'back';
+        document.getElementById('back-btn').classList.add('active');
+        document.getElementById('front-btn').classList.remove('active');
+        updateImage();
+    };
+
+    document.addEventListener('DOMContentLoaded', populateDetails);
 </script>
 </body>
 </html>

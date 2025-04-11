@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Магазин футболок</title>
     <script type="module" src="shirts.js"></script>
     <style>
@@ -41,8 +41,8 @@
         }
 
         .shirt-name {
-            margin: 0 0 10px 0;
             font-size: 1.2em;
+            margin: 0 0 10px 0;
         }
 
         .shirt-description {
@@ -56,23 +56,22 @@
             margin-bottom: 15px;
         }
 
-        .quick-view-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
+        .quick-view-btn,
+        .see-page-btn {
             padding: 10px 20px;
+            border: none;
             border-radius: 4px;
             cursor: pointer;
+            color: white;
+        }
+
+        .quick-view-btn {
+            background: #4CAF50;
             margin-right: 10px;
         }
 
         .see-page-btn {
             background: #2196F3;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
         }
 
         .quick-view-modal {
@@ -83,6 +82,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             display: none;
+            z-index: 9999;
         }
 
         .quick-view-content {
@@ -93,42 +93,18 @@
             background: white;
             padding: 20px;
             border-radius: 8px;
-            max-width: 800px;
             width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .quick-view-image {
-            width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: contain;
+            max-width: 600px;
+            text-align: center;
         }
 
         .close-modal {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: none;
-            border: none;
             font-size: 24px;
-            cursor: pointer;
-        }
-
-        .shirt-view-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .toggle-view-btn {
-            background: #4CAF50;
-            color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 4px;
+            background: none;
             cursor: pointer;
         }
 
@@ -136,6 +112,15 @@
             max-width: 100%;
             max-height: 400px;
             object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .quick-text h2 {
+            margin: 10px 0;
+        }
+
+        .quick-text p {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -145,8 +130,23 @@
     <div id="shirt-container" class="shirt-grid"></div>
 </div>
 
+<!-- Quick View Modal -->
+<div id="quick-view-modal" class="quick-view-modal">
+    <div class="quick-view-content">
+        <button class="close-modal" id="close-quick-view">&times;</button>
+        <img id="quick-view-image" class="quick-view-image" src="" alt="">
+        <div class="quick-text">
+            <h2 id="quick-name"></h2>
+            <p id="quick-description"></p>
+            <p id="quick-price"></p>
+        </div>
+    </div>
+</div>
+
 <script type="module">
     import { shirts } from './shirts.js';
+
+    const container = document.getElementById('shirt-container');
 
     function createShirtCard(shirt) {
         const card = document.createElement('div');
@@ -155,37 +155,61 @@
         const description = shirt.description || 'Описание отсутствует';
 
         card.innerHTML = `
-            <img src="${shirt.colors.white?.front || shirt.default?.front}"
-                 alt="${shirt.name}"
-                 class="shirt-image"
-                 onerror="this.src='${shirt.default?.front}'">
-            <div class="shirt-info">
-                <h3 class="shirt-name">${shirt.name}</h3>
-                <p class="shirt-description">${description}</p>
-                <p class="shirt-price">${shirt.price}</p>
-                <button class="see-page-btn">See Page</button>
-            </div>
-        `;
+        <img src="${shirt.colors.white?.front || shirt.default?.front}"
+             alt="${shirt.name}"
+             class="shirt-image"
+             onerror="this.src='${shirt.default?.front}'">
+        <div class="shirt-info">
+          <h3 class="shirt-name">${shirt.name}</h3>
+          <p class="shirt-description">${description}</p>
+          <p class="shirt-price">${shirt.price}</p>
+          <button class="quick-view-btn">Quick View</button>
+          <button class="see-page-btn">See Page</button>
+        </div>
+      `;
 
         card.__shirt__ = shirt;
 
         return card;
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const container = document.getElementById('shirt-container');
-        shirts.forEach(shirt => {
-            const card = createShirtCard(shirt);
-            container.appendChild(card);
-        });
-
-        document.querySelectorAll('.see-page-btn').forEach(btn => {
-            btn.onclick = function() {
-                const shirtIndex = shirts.indexOf(this.closest('.shirt-card').__shirt__);
-                window.location.href = `details.html?id=${shirtIndex}`;
-            };
-        });
+    shirts.forEach(shirt => {
+        const card = createShirtCard(shirt);
+        container.appendChild(card);
     });
+
+    document.querySelectorAll('.see-page-btn').forEach(btn => {
+        btn.onclick = function () {
+            const shirt = this.closest('.shirt-card').__shirt__;
+            const index = shirts.indexOf(shirt);
+            window.location.href = `details.html?id=${index}`;
+        };
+    });
+
+    const modal = document.getElementById('quick-view-modal');
+    const quickImage = document.getElementById('quick-view-image');
+    const quickName = document.getElementById('quick-name');
+    const quickDescription = document.getElementById('quick-description');
+    const quickPrice = document.getElementById('quick-price');
+
+    function showQuickView(shirt) {
+        quickImage.src = shirt.colors.white?.front || shirt.default?.front;
+        quickName.textContent = shirt.name;
+        quickDescription.textContent = shirt.description || 'Описание отсутствует';
+        quickPrice.textContent = shirt.price;
+        modal.style.display = 'block';
+    }
+
+    document.querySelectorAll('.quick-view-btn').forEach(btn => {
+        btn.onclick = function () {
+            const shirt = this.closest('.shirt-card').__shirt__;
+            showQuickView(shirt);
+        };
+    });
+
+    document.getElementById('close-quick-view').onclick = () => {
+        modal.style.display = 'none';
+    };
 </script>
 </body>
 </html>
