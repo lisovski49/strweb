@@ -1,136 +1,74 @@
-class DraggableElement {
-    constructor(element) {
-        this.element = element;
-        this.originalPosition = null;
-        this.lastPosition = null;
-        this.isDragging = false;
-        this.isSticky = false;
-        this.lastClickTime = 0;
-        this.clickTimeout = null;
+const targets = document.querySelectorAll('.target');
 
-        const style = window.getComputedStyle(element);
-        this.originalPosition = {
-            x: parseInt(style.left),
-            y: parseInt(style.top)
-        };
+targets.forEach(target => {
+    let isDragging = false;
+    let isDoubleClick = false;
+    let initialX, initialY;
+    let offsetX, offsetY;
 
-        this.element.style.backgroundColor = 'red';
+    let lastPosition = {x: target.offsetLeft, y: target.offsetTop};
 
-        this.setupEventListeners();
-    }
+    target.addEventListener('mousedown', (e) => {
+        if (isDoubleClick) return;
 
-    setupEventListeners() {
-        this.element.addEventListener('mousedown', this.handleMouseDown.bind(this));
-        this.element.addEventListener('click', this.handleClick.bind(this));
-    }
+        isDragging = true;
 
-    handleClick(e) {
-        const currentTime = Date.now();
-        const timeDiff = currentTime - this.lastClickTime;
+        initialX = e.clientX - target.offsetLeft;
+        initialY = e.clientY - target.offsetTop;
 
-        if (timeDiff < 300 && !this.isDragging) {
-            this.toggleStickyMode();
-        }
+        document.addEventListener('mousemove', mouseMove);
+        document.addEventListener('mouseup', mouseUp);
+    });
 
-        this.lastClickTime = currentTime;
-    }
+    function mouseMove(e) {
+        if (isDragging) {
+            let newX = e.clientX - initialX;
+            let newY = e.clientY - initialY;
 
-    handleMouseDown(e) {
-        if (this.isSticky) {
-            this.toggleStickyMode();
-            return;
-        }
-
-        const style = window.getComputedStyle(this.element);
-        this.lastPosition = {
-            x: parseInt(style.left),
-            y: parseInt(style.top)
-        };
-
-        this.isDragging = true;
-        const rect = this.element.getBoundingClientRect();
-
-        this.mouseOffset = {
-            x: e.clientX - rect.left,
-            y: e.clientY - rect.top
-        };
-
-        document.addEventListener('mousemove', this.handleMouseMove.bind(this));
-        document.addEventListener('mouseup', this.handleMouseUp.bind(this));
-    }
-
-    handleMouseMove(e) {
-        if (!this.isDragging && !this.isSticky) return;
-
-        const x = e.clientX - this.mouseOffset.x;
-        const y = e.clientY - this.mouseOffset.y;
-
-        this.element.style.left = `${x}px`;
-        this.element.style.top = `${y}px`;
-    }
-
-    handleMouseUp() {
-        if (!this.isDragging) return;
-
-        this.isDragging = false;
-        document.removeEventListener('mousemove', this.handleMouseMove.bind(this));
-        document.removeEventListener('mouseup', this.handleMouseUp.bind(this));
-    }
-
-    toggleStickyMode() {
-        this.isSticky = !this.isSticky;
-
-        if (this.isSticky) {
-            this.element.style.backgroundColor = 'blue';
-
-            const handlers = document.getEventListeners(document).mousemove;
-            handlers.forEach(handler => {
-                if (handler.listener.toString().includes('handleMouseMove')) {
-                    document.removeEventListener('mousemove', handler.listener);
-                }
-            });
-
-            document.addEventListener('mousemove', this.handleMouseMove.bind(this));
-            document.addEventListener('click', () => {
-                this.toggleStickyMode();
-            });
-        } else {
-            this.element.style.backgroundColor = 'red';
-
-            document.removeEventListener('mousemove', this.handleMouseMove.bind(this));
-            document.removeEventListener('click', arguments.callee);
+            target.style.left = newX + 'px';
+            target.style.top = newY + 'px';
         }
     }
 
-    resetPosition() {
-        if (!this.lastPosition) {
-            this.lastPosition = this.originalPosition;
+    function mouseUp() {
+        if (isDragging) {
+            isDragging = false;
+            lastPosition.x = target.offsetLeft;
+            lastPosition.y = target.offsetTop;
         }
-
-        this.element.style.left = `${this.lastPosition.x}px`;
-        this.element.style.top = `${this.lastPosition.y}px`;
-
-        if (this.isSticky) {
-            this.toggleStickyMode();
-        }
-
-        this.isDragging = false;
+        document.removeEventListener('mousemove', mouseMove);
+        document.removeEventListener('mouseup', mouseUp);
     }
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-    const targets = document.querySelectorAll('.target');
+    target.addEventListener('dblclick', () => {
+        isDoubleClick = true;
+        target.style.backgroundColor = 'yellow';
+        document.addEventListener('mousemove', mouseMoveDoubleClick);
 
-    const draggableElements = Array.from(targets).map(element =>
-        new DraggableElement(element)
-    );
+        target.addEventListener('click', () => {
+            isDoubleClick = false;
+            target.style.backgroundColor = '';
+            document.removeEventListener('mousemove', mouseMoveDoubleClick);
+        });
+    });
+
+    function mouseMoveDoubleClick(e) {
+        if (isDoubleClick) {
+            let newX = e.clientX - initialX;
+            let newY = e.clientY - initialY;
+
+            target.style.left = newX + 'px';
+            target.style.top = newY + 'px';
+        }
+    }
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const stickyElement = draggableElements.find(el => el.isSticky);
-            if (stickyElement) {
-                stickyElement.resetPosition();
-            }
+        if (e.key === 'Escape' && (isDragging || isDoubleClick)) {
+            target.style.left = lastPosition.x + 'px';
+            target.style.top = lastPosition.y + 'px';
+            isDragging = false;
+            isDoubleClick = false;
+            target.style.backgroundColor = '';
         }
     });
 });
