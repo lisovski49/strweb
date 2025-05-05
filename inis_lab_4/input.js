@@ -42,7 +42,7 @@ targets.forEach(target => {
 
     target.addEventListener('dblclick', () => {
         isDoubleClick = true;
-        target.style.backgroundColor = 'yellow';
+        target.style.backgroundColor = 'blue';
         document.addEventListener('mousemove', mouseMoveDoubleClick);
 
         target.addEventListener('click', () => {
